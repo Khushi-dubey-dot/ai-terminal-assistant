@@ -653,42 +653,40 @@ A confirmation step provides the user with an opportunity to review the suggeste
 
 ```mermaid
 graph TB
-    U[User]
+    U["User"]
 
-    subgraph CLI[Python CLI Application]
-        M[main]
-        C[correct_command]
-        G[get_installed_commands]
-        E[execute_command]
+    subgraph CLI["Python CLI Application"]
+        M["main"]
+        C["correct_command"]
+        G["get_installed_commands"]
+        E["execute_command"]
     end
 
-    subgraph AI[AI Layer]
-        O[OpenAI API]
+    subgraph AI["AI Layer"]
+        O["OpenAI API"]
     end
 
-    subgraph LOCAL[Local Fallback]
-        S[shlex]
-        D[difflib]
-        B[Bash command list]
+    subgraph LOCAL["Local Fallback"]
+        S["shlex"]
+        D["difflib"]
+        B["Bash command list"]
     end
 
-    subgraph OS[Operating System]
-        SH[/bin/bash]
-        OUT[Command Output]
+    subgraph OS["Operating System"]
+        SH["Bash shell"]
+        OUT["Command output"]
     end
 
     U --> M
     M --> C
     M --> G
     G --> B
-
     C --> O
     O -->|Success| C
     O -->|Exception| S
     S --> D
     B --> D
     D --> C
-
     C --> E
     E --> SH
     SH --> OUT
